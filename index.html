@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="ART: Bridging the Embodiment Gap in 3D Human-to-Robot Affordance Transfer. A new task, the HPAD dataset and the ART network for turning human affordance priors into robot-actionable 3D affordance.">
+  <meta name="keywords" content="ART, HPAD, 3D affordance, human-to-robot affordance transfer, robot manipulation, embodiment gap">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ART: Bridging the Embodiment Gap in 3D Human-to-Robot Affordance Transfer</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script defer src="./static/js/bulma-carousel.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
+</head>
+<body>
+<!-- Icons: Font Awesome Free 5.15.1 (https://fontawesome.com), CC BY 4.0. -->
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">ART: Bridging the Embodiment Gap in 3D Human-to-Robot Affordance Transfer</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a class="no-link">Zichen Zhang</a><sup>1</sup>,</span>
+            <span class="author-block"><a class="no-link">Wei Zhai</a><sup>1</sup>,</span>
+            <span class="author-block"><a class="no-link">Xuji Zhang</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://scholar.google.com.hk/citations?hl=zh-CN&user=K7rTHNcAAAAJ">Yang Cao</a><sup>1,2,&#9993;</sup>,</span>
+            <span class="author-block"><a class="no-link">Yu Kang</a><sup>1,2,3</sup></span>
+          </div>
+          <div class="is-size-6 publication-authors" style="margin-top: 0.5rem;">
+            <span class="author-block"><sup>1</sup>University of Science and Technology of China&nbsp;&nbsp;</span>
+            <span class="author-block"><sup>2</sup>Institute of Artificial Intelligence, Hefei Comprehensive National Science Center&nbsp;&nbsp;</span>
+            <span class="author-block"><sup>3</sup>Hefei University of Technology</span>
+          </div>
+          <div class="is-size-7" style="margin-top: 0.3rem; color: #7a7a7a;"><sup>&#9993;</sup>Corresponding author</div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark" title="The arXiv version will be linked here">
+                  <span class="icon"><svg class="fa-inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z"/></svg></span>
+                  <span>arXiv <span class="soon">(coming soon)</span></span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark" title="Inference code and checkpoints will be released first">
+                  <span class="icon"><svg class="fa-inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                  <span>Code <span class="soon">(coming soon)</span></span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark" title="The HPAD dataset will be released first">
+                  <span class="icon"><svg class="fa-inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"/></svg></span>
+                  <span>HPAD Dataset <span class="soon">(coming soon)</span></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png" alt="3D Human-to-Robot Affordance Transfer" style="width: 72%;">
+      <p class="figure-caption" style="text-align: center;">
+        <b>3D Human-to-Robot Affordance Transfer.</b> Given an object point cloud with a human prior affordance and an
+        action (e.g., Grasp), ART infers the affordance distribution that a robot gripper can actually act on.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            3D affordance acts as a critical link between perception and action, providing priors for robotic
+            manipulation. While existing approaches predominantly leverage human priors as direct references, they
+            often overlook that affordance is not an object-intrinsic property but is inherently coupled with the
+            agent's embodiment. Due to the structural and morphological disparities between human hands and robot
+            end-effectors, directly applying human priors causes severe incompatibility for robotic execution.
+            Motivated by this, we introduce a novel task setting, <b>3D Human-to-Robot Affordance Transfer</b>, which
+            addresses the affordance misalignment arising from distinct embodiment structures. To support this task, we
+            construct the <b>H</b>uman-Robot <b>P</b>aired <b>A</b>ffordance <b>D</b>ataset (<b>HPAD</b>), the first
+            large-scale 3D affordance benchmark in which every object is annotated with both human-prior and
+            simulation-validated robot labels. HPAD covers 2,137 objects across 80 categories and 13 atomic action
+            primitives, yielding over 27,000 object&ndash;action pairs. On top of HPAD, we propose the 3D
+            <b>A</b>ffordance t<b>R</b>ansfer ne<b>T</b>work (<b>ART</b>). ART first filters geometric false positives
+            in the human prior via a reliability gating stream, then reconstructs the prior into a robot-actionable
+            distribution through hierarchical reconstruction and a graph-diffusion refinement that resolves the
+            topological mismatch between human and robot affordances. Experiments on HPAD demonstrate the reliability
+            of the proposed task and the superiority of ART. We further validate ART on a 6-DoF arm with a
+            parallel-jaw gripper in a 2,400-execution benchmark across 12 objects and 4 action categories; ART attains
+            the best success rate (86.5% over its 480 trials), confirming the practicality of the transfer paradigm.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- anim:start -->
+<h2 class="title is-3 section-title-center">From Human Prior to Robot Affordance</h2>
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/01_cup_Grasp.jpg" aria-label="Cup, Grasp: human prior, ART prediction and robot label">
+              <source src="./static/videos/01_cup_Grasp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Cup &middot; Grasp</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/00_knife_Pushxp.jpg" aria-label="Knife, Pushxp: human prior, ART prediction and robot label">
+              <source src="./static/videos/00_knife_Pushxp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Knife &middot; Push (+x)</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/02_bottle_Grasp.jpg" aria-label="Bottle, Grasp: human prior, ART prediction and robot label">
+              <source src="./static/videos/02_bottle_Grasp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Bottle &middot; Grasp</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/28_doughnut_Dragyn.jpg" aria-label="Doughnut, Dragyn: human prior, ART prediction and robot label">
+              <source src="./static/videos/28_doughnut_Dragyn.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Doughnut &middot; Drag (&minus;y)</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/04_flowerpot_Grasp.jpg" aria-label="Flowerpot, Grasp: human prior, ART prediction and robot label">
+              <source src="./static/videos/04_flowerpot_Grasp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Flowerpot &middot; Grasp</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/17_egg_Pushyp.jpg" aria-label="Egg, Pushyp: human prior, ART prediction and robot label">
+              <source src="./static/videos/17_egg_Pushyp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Egg &middot; Push (+y)</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/19_candle_Leanxp.jpg" aria-label="Candle, Leanxp: human prior, ART prediction and robot label">
+              <source src="./static/videos/19_candle_Leanxp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Candle &middot; Lean (+x)</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/05_baseball_bat_Grasp.jpg" aria-label="Baseball Bat, Grasp: human prior, ART prediction and robot label">
+              <source src="./static/videos/05_baseball_bat_Grasp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Baseball Bat &middot; Grasp</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/20_apple_Dragyp.jpg" aria-label="Apple, Dragyp: human prior, ART prediction and robot label">
+              <source src="./static/videos/20_apple_Dragyp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Apple &middot; Drag (+y)</div>
+          </div>
+          <div class="item">
+            <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/27_handbag_Leanxp.jpg" aria-label="Handbag, Leanxp: human prior, ART prediction and robot label">
+              <source src="./static/videos/27_handbag_Leanxp.mp4" type="video/mp4">
+            </video>
+            <div class="item-label">Handbag &middot; Lean (+x)</div>
+          </div>
+      </div>
+      <div class="anim-legend">
+        Test objects from HPAD. Red marks the affordance region. Left: the human prior. Middle: the robot affordance
+        predicted by ART. Right: the robot label obtained from simulation-validated trials.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- anim:end -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Why Transfer?</h2>
+        <div class="content has-text-justified">
+          <p>
+            A human hand and a parallel-jaw gripper contact the same object differently. Regions that are natural for a
+            hand can be geometrically infeasible for a gripper, and the region a gripper needs often has a different
+            shape from the one a person would touch. A human prior therefore cannot be handed to a robot as it is.
+          </p>
+        </div>
+        <div class="figure-block">
+          <img src="./static/images/motivation.png" alt="Motivation" style="width: 68%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>Motivation.</b> (a) False positives in the human prior are suppressed by leveraging gripper constraints
+          and object geometry. (b) Conditioned on the action and the gripper morphology, the human prior distribution
+          is transformed into a robot-structured pattern.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="figure-block">
+          <img src="./static/images/method.png" alt="Overview of ART" style="width: 100%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>Overview of ART.</b> ART encodes the input point cloud and the human prior into features modulated by
+          global context (action and object size). The features are processed by two complementary streams:
+          <b>GRG</b> (Geometric Reliability Gating) estimates the reliability of the human prior to suppress
+          geometrically invalid regions, while <b>HAR</b> (Hierarchical Affordance Reconstruction) reconstructs the
+          prior into a robot-structured affordance representation. A final decoder fuses the two streams and predicts
+          the robot affordance map.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">HPAD Dataset</h2>
+        <div class="content has-text-justified">
+          <p>
+            HPAD is a 3D affordance benchmark in which every object carries two labels for each action: a
+            <b>human prior</b>, painted by annotators as a per-point mask, and a <b>robot affordance</b>, obtained
+            from manipulation trials validated in simulation.
+          </p>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">2,137</div><div class="lab">objects</div></div>
+          <div class="stat"><div class="num">80</div><div class="lab">object categories</div></div>
+          <div class="stat"><div class="num">13</div><div class="lab">atomic action primitives</div></div>
+          <div class="stat"><div class="num">27,000+</div><div class="lab">object&ndash;action pairs</div></div>
+        </div>
+        <div class="figure-block">
+          <img src="./static/images/hpad_pipeline.jpg" alt="HPAD construction" style="width: 100%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>HPAD construction.</b> (a) Robot Affordance Generation Pipeline: an automated workflow that produces robot
+          affordance labels from object point clouds. (b) Robot Affordance Refinement UI: an interactive tool used to
+          refine the labels flagged by the quality checks. (c) Human Prior Annotation UI: a custom interface used to
+          paint per-point human priors on the same object point clouds.
+        </p>
+        <div class="figure-block" style="margin-top: 2rem;">
+          <img src="./static/images/hpad_stats.png" alt="HPAD statistics" style="width: 92%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>HPAD statistics and the embodiment gap.</b> (a) Top-20 object categories by frequency. (b) Activation
+          ratio of the binary human prior versus thresholded robot labels. (c) IoU between the two activations as a
+          function of the threshold: the human prior and the robot label overlap only partly.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experiment Results</h2>
+        <div class="figure-block">
+          <img src="./static/images/table_main.png" alt="Comparison results on HPAD" style="width: 100%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>Comparison results on HPAD.</b> Blue: methods that do not use the human prior (Robot-Only). Green: Input
+          Concatenation, where the per-point human prior map is appended as an input channel. Orange: Feature Fusion
+          baselines that inject the prior at the latent level (Cross-Attention / FiLM) on the PointNeXt backbone.
+          &#9671; denotes the relative improvement of our method; bold marks the best result. &ldquo;Ours w/o
+          prior&rdquo; is ART trained and evaluated with the human prior set to zero.
+        </p>
+        <div class="figure-block" style="margin-top: 2rem;">
+          <img src="./static/images/qualitative.png" alt="Visualization results" style="width: 100%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>Visualization results.</b> Rows show the human prior (Prior), the predictions of Net++, NeXt, FiLM and
+          Ours, and the ground truth (GT). The left four columns come from the Seen partition and the right four from
+          the Unseen partition. Arrows indicate the action direction, and red intensity encodes the per-point
+          affordance. Inset boxes show the back-side view of the same object.
+        </p>
+        <div class="figure-block" style="margin-top: 2rem;">
+          <img src="./static/images/action_cond.png" alt="Action-conditioned transfer" style="width: 70%;" loading="lazy">
+        </div>
+        <p class="figure-caption" style="text-align: center;">
+          <b>Action-conditioned transfer.</b> The same human prior is transferred to different robot affordances for
+          different actions.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Real-World Experiments</h2>
+        <div class="content has-text-justified">
+          <p>
+            ART is evaluated on a 6-DoF arm with a parallel-jaw gripper: 12 objects, 4 action categories (Grasp, Push,
+            Drag, Lean), five methods and 10 physical trials per (object, action, method) configuration, 2,400
+            executions in total. Object point clouds are reconstructed from real multi-view RGB-D observations.
+          </p>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">86.5%</div><div class="lab">success rate with ART</div></div>
+          <div class="stat"><div class="num">58.3%</div><div class="lab">when the human prior is used directly</div></div>
+          <div class="stat"><div class="num">2,400</div><div class="lab">physical executions</div></div>
+        </div>
+        <div class="figure-block">
+          <img src="./static/images/real_setup.jpg" alt="Real-world evaluation setup" style="width: 46%; border-radius: 6px;" loading="lazy">
+        </div>
+        <p class="figure-caption" style="text-align: center;">
+          <b>Real-world evaluation setup.</b> A 6-DoF robot arm equipped with a parallel-jaw gripper and an RGB-D camera.
+        </p>
+        <div class="figure-block" style="margin-top: 2rem;">
+          <img src="./static/images/table_real.png" alt="Real-world manipulation success rates" style="width: 100%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>Real-world manipulation success rates (%).</b> H-P: human prior used directly; C-A: Cross-Attention; F-M: FiLM; A-N: ART
+          w/o prior. Bold marks the best method per (object, action), gray shading highlights ART, and &dagger; denotes
+          objects not present in HPAD.
+        </p>
+        <div class="figure-block" style="margin-top: 2rem;">
+          <img src="./static/images/real_pipeline.jpg" alt="Real-world execution pipeline" style="width: 100%;" loading="lazy">
+        </div>
+        <p class="figure-caption">
+          <b>Real-world execution pipeline.</b> Each row shows one (object, action) example. From left to right: the
+          RGB-D input, the human prior on the object, the affordance predicted by ART w/o prior, the transferred
+          affordance produced by ART, the manipulation points sampled from the ART map, and the corresponding
+          real-world execution. Red regions indicate affordance maps, and green points are sampled contact points.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{zhang2026art,
+  title   = {ART: Bridging the Embodiment Gap in 3D Human-to-Robot Affordance Transfer},
+  author  = {Zhang, Zichen and Zhai, Wei and Zhang, Xuji and Cao, Yang and Kang, Yu},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>. The page layout follows the
+            <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> website template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
