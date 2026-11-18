@@ -104,6 +104,11 @@ body {
   overflow: hidden;
 }
 
+/* several rows of animations: one carousel per row */
+.results-carousel + .results-carousel {
+  margin-top: 0.9rem;
+}
+
 .results-carousel .item {
   margin: 5px;
   overflow: hidden;
