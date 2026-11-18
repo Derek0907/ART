@@ -9,10 +9,8 @@
   <title>ART: Bridging the Embodiment Gap in 3D Human-to-Robot Affordance Transfer</title>
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 
-  <script defer src="./static/js/bulma-carousel.min.js"></script>
   <script defer src="./static/js/index.js"></script>
 </head>
 <body>
@@ -115,7 +113,9 @@
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
+      <div class="anim-row">
+        <button class="anim-nav anim-prev" type="button" aria-label="Previous" hidden>&#9664;</button>
+        <div id="results-carousel" class="anim-track results-carousel">
           <div class="item">
             <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/01_cup_Grasp.jpg" aria-label="Cup, Grasp: human prior, ART prediction and robot label">
               <source src="./static/videos/01_cup_Grasp.mp4" type="video/mp4">
@@ -152,8 +152,12 @@
             </video>
             <div class="item-label">Key &middot; Drag (+x)</div>
           </div>
+        </div>
+        <button class="anim-nav anim-next" type="button" aria-label="Next">&#9654;</button>
       </div>
-      <div id="results-carousel-2" class="carousel results-carousel">
+      <div class="anim-row">
+        <button class="anim-nav anim-prev" type="button" aria-label="Previous" hidden>&#9664;</button>
+        <div id="results-carousel-2" class="anim-track results-carousel">
           <div class="item">
             <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/02_bottle_Grasp.jpg" aria-label="Bottle, Grasp: human prior, ART prediction and robot label">
               <source src="./static/videos/02_bottle_Grasp.mp4" type="video/mp4">
@@ -190,8 +194,12 @@
             </video>
             <div class="item-label">Handbag &middot; Lean (+x)</div>
           </div>
+        </div>
+        <button class="anim-nav anim-next" type="button" aria-label="Next">&#9654;</button>
       </div>
-      <div id="results-carousel-3" class="carousel results-carousel">
+      <div class="anim-row">
+        <button class="anim-nav anim-prev" type="button" aria-label="Previous" hidden>&#9664;</button>
+        <div id="results-carousel-3" class="anim-track results-carousel">
           <div class="item">
             <video autoplay loop muted playsinline preload="metadata" width="872" height="320" poster="./static/videos/04_flowerpot_Grasp.jpg" aria-label="Flowerpot, Grasp: human prior, ART prediction and robot label">
               <source src="./static/videos/04_flowerpot_Grasp.mp4" type="video/mp4">
@@ -228,6 +236,8 @@
             </video>
             <div class="item-label">Apple &middot; Drag (+y)</div>
           </div>
+        </div>
+        <button class="anim-nav anim-next" type="button" aria-label="Next">&#9654;</button>
       </div>
       <div class="anim-legend">
         Test objects from HPAD. Red marks the affordance region. Left: the human prior. Middle: the robot affordance

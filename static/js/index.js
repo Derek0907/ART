@@ -1,4 +1,4 @@
-// ART project page: navbar burger + result carousels (no external dependencies).
+// ART project page: navbar burger + rows of result animations (no external dependencies).
 document.addEventListener('DOMContentLoaded', function () {
   var burger = document.querySelector('.navbar-burger');
   var menu = document.querySelector('.navbar-menu');
@@ -9,17 +9,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  if (window.bulmaCarousel && document.querySelector('.carousel')) {
-    var narrow = window.matchMedia('(max-width: 768px)').matches;
-    bulmaCarousel.attach('.carousel', {
-      slidesToScroll: 1,
-      slidesToShow: narrow ? 1 : 2,
-      loop: false,
-      infinite: false,
-      pagination: false,
-      autoplay: false
-    });
-  }
+  // Rows of animations: the layout is pure CSS; the buttons scroll a row by one item.
+  document.querySelectorAll('.anim-row').forEach(function (row) {
+    var track = row.querySelector('.anim-track');
+    var prev = row.querySelector('.anim-prev');
+    var next = row.querySelector('.anim-next');
+    if (!track || !prev || !next) { return; }
+    function step() {
+      var item = track.querySelector('.item');
+      var gap = parseFloat(window.getComputedStyle(track).columnGap) || 0;
+      return item ? item.getBoundingClientRect().width + gap : track.clientWidth;
+    }
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.hidden = track.scrollLeft <= 2;
+      next.hidden = track.scrollLeft >= max - 2;
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
 
   // Play the result videos only while they are on screen (slides outside the view stay paused).
   var videos = document.querySelectorAll('.results-carousel video');
